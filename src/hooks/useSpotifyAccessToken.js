@@ -1,5 +1,5 @@
 import { useEffect , useState } from "react";
-import axios from "../axios/axios";
+import axios from "axios";
 
 export default function useSpotifyAccessToken() {{
     const [token , setToken] = useState(null);
@@ -19,6 +19,7 @@ export default function useSpotifyAccessToken() {{
 
                 const { access_token } = response.data;
 
+                console.log(response.data)
                 setToken(access_token);
             } catch (error) {
                 console.log(error);

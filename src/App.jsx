@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import useSpotifyAccessToken from './hooks/useSpotifyAccessToken'
 import { useDispatch } from 'react-redux'
 import { setToken } from './slice/tokenSlice'
+import axios from 'axios'
 
 function App() {
 
@@ -15,8 +16,20 @@ function App() {
   const dispatch = useDispatch();
 
   if (token) {
-    dispatch(setToken({token: token}))
+    dispatch(setToken({ token: token }))
   }
+
+  useEffect(() => {
+    if (token) {
+      axios.get("https://api.spotify.com/v1/me", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(response => {
+        console.log(response.data);
+      })
+    }
+  })
 
   return (
     <>
