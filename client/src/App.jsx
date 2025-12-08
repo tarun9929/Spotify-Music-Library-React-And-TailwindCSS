@@ -21,12 +21,17 @@ function App() {
 
   useEffect(() => {
     if (token) {
-      axios.get("https://api.spotify.com/v1/me", {
+      const response = axios.get("https://api.spotify.com/v1/me" , {
         headers: {
           Authorization: `Bearer ${token}`
         }
-      }).then(response => {
-        console.log(response.data);
+      })
+
+      response.then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
       })
     }
   })
